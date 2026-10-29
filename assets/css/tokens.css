@@ -1,0 +1,246 @@
+/* =========================================================================
+ * 校园智服通 CampusMate · 设计令牌 tokens.css
+ * -------------------------------------------------------------------------
+ * 只定义颜色、字号、间距、圆角、阴影、层级等“设计变量”，不写具体组件。
+ * 浅色为默认，[data-theme="dark"] 覆盖为深色。所有组件只引用变量。
+ * ========================================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* ---------- 字体 ---------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif;
+  --font-mono: "SFMono-Regular", "Cascadia Code", Consolas, "Liberation Mono", monospace;
+
+  /* ---------- 字号 ---------- */
+  --text-2xs: 10.5px;
+  --text-xs: 11.5px;
+  --text-sm: 12.5px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 38px;
+  --text-hero: clamp(30px, 3.1vw, 44px);
+
+  /* ---------- 间距 ---------- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ---------- 圆角 ---------- */
+  --radius-xs: 6px;
+  --radius-sm: 9px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 26px;
+  --radius-full: 999px;
+
+  /* ---------- 布局 ---------- */
+  --sidebar-width: 248px;
+  --topbar-height: 72px;
+  --content-max: 1440px;
+  --page-gutter: 28px;
+
+  /* ---------- 原始色板 ---------- */
+  --blue-50: #eef3ff;
+  --blue-100: #dfe8ff;
+  --blue-200: #c4d3ff;
+  --blue-400: #6d8cff;
+  --blue-500: #4f7cff;
+  --blue-600: #3b5bdb;
+  --blue-700: #2946c4;
+  --violet-400: #a78bfa;
+  --violet-500: #8b5cf6;
+  --violet-600: #7c3aed;
+  --teal-400: #2dd4bf;
+  --teal-500: #14b8a6;
+  --teal-600: #0d9488;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --red-400: #fb7185;
+  --red-500: #f43f5e;
+  --red-600: #dc2626;
+  --slate-25: #fbfcfe;
+  --slate-50: #f6f8fc;
+  --slate-100: #eef2f8;
+  --slate-200: #e1e7f1;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --navy-900: #0b1226;
+  --navy-800: #101a33;
+  --navy-700: #17233f;
+
+  /* ---------- 语义色（浅色） ---------- */
+  --bg: #f3f6fc;
+  --bg-grid: rgba(59, 91, 219, 0.045);
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-soft: #f8faff;
+  --surface-muted: #f1f5fb;
+  --surface-tint: #eef3ff;
+  --border: #e5eaf4;
+  --border-strong: #d5deec;
+  --border-focus: var(--blue-500);
+  --text: #101a2f;
+  --text-2: #4c5c76;
+  --text-3: #64748b;
+  --text-inverse: #ffffff;
+  --primary: #3b5bdb;
+  --primary-hover: #2f4cc7;
+  --primary-active: #273fae;
+  --primary-soft: #eef3ff;
+  --primary-soft-2: #dfe8ff;
+  --primary-contrast: #ffffff;
+  --accent: #0d9488;
+  --accent-soft: #e6fffa;
+  --success: #15803d;
+  --success-soft: #ecfdf3;
+  --warning: #b45309;
+  --warning-soft: #fff8e8;
+  --danger: #d92d20;
+  --danger-soft: #fff1f0;
+  --info: #1d4ed8;
+  --info-soft: #eff6ff;
+
+  --sidebar-bg: #0e1830;
+  --sidebar-bg-2: #0a1124;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-text: #dbe5f7;
+  --sidebar-muted: #8494b3;
+  --sidebar-active: rgba(100, 137, 255, 0.16);
+  --sidebar-active-border: #5d7dff;
+  --sidebar-hover: rgba(255, 255, 255, 0.055);
+
+  /* ---------- 图表色 ---------- */
+  --chart-1: #3b5bdb;
+  --chart-2: #0d9488;
+  --chart-3: #8b5cf6;
+  --chart-4: #f59e0b;
+  --chart-5: #ec4899;
+  --chart-6: #94a3b8;
+  --chart-grid: #e8edf6;
+  --chart-axis: #7c8ba0;
+  --chart-fill: rgba(59, 91, 219, 0.1);
+
+  /* ---------- 阴影与焦点 ---------- */
+  --shadow-xs: 0 1px 2px rgba(16, 26, 47, 0.04);
+  --shadow-sm: 0 2px 8px rgba(16, 26, 47, 0.04), 0 1px 2px rgba(16, 26, 47, 0.04);
+  --shadow-md: 0 12px 32px -18px rgba(16, 26, 47, 0.28), 0 2px 8px rgba(16, 26, 47, 0.04);
+  --shadow-lg: 0 24px 60px -28px rgba(16, 26, 47, 0.32), 0 4px 14px rgba(16, 26, 47, 0.05);
+  --shadow-xl: 0 36px 90px -36px rgba(16, 26, 47, 0.42), 0 8px 24px rgba(16, 26, 47, 0.08);
+  --focus-ring: 0 0 0 3px rgba(79, 124, 255, 0.24);
+
+  /* ---------- 渐变 ---------- */
+  --gradient-brand: linear-gradient(135deg, #4f7cff 0%, #7c3aed 100%);
+  --gradient-brand-soft: linear-gradient(135deg, #eef3ff 0%, #f4f0ff 100%);
+  --gradient-hero: radial-gradient(circle at 84% 16%, rgba(124, 58, 237, 0.12), transparent 34%),
+    radial-gradient(circle at 12% 90%, rgba(20, 184, 166, 0.1), transparent 36%),
+    linear-gradient(135deg, #ffffff 0%, #f7f9ff 52%, #f3f5ff 100%);
+  --gradient-panel: linear-gradient(160deg, #101b38 0%, #0a1124 100%);
+  --gradient-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
+
+  /* ---------- 动效 ---------- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration: 180ms;
+  --duration-slow: 320ms;
+
+  /* ---------- 层级 ---------- */
+  --z-sticky: 30;
+  --z-dropdown: 50;
+  --z-palette: 80;
+  --z-drawer: 90;
+  --z-hud: 95;
+  --z-toast: 120;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #070c16;
+  --bg-grid: rgba(109, 140, 255, 0.07);
+  --surface: #0e1524;
+  --surface-raised: #121b2c;
+  --surface-soft: #0b1322;
+  --surface-muted: #0a111f;
+  --surface-tint: #111c36;
+  --border: #1e2a40;
+  --border-strong: #2a3a56;
+  --text: #e9eefb;
+  --text-2: #a7b4cc;
+  --text-3: #8494b0;
+  --text-inverse: #07101f;
+  --primary: #6d8cff;
+  --primary-hover: #86a0ff;
+  --primary-active: #9bb1ff;
+  --primary-soft: rgba(79, 124, 255, 0.16);
+  --primary-soft-2: rgba(79, 124, 255, 0.24);
+  --primary-contrast: #ffffff;
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.12);
+  --success: #4ade80;
+  --success-soft: rgba(34, 197, 94, 0.12);
+  --warning: #fbbf24;
+  --warning-soft: rgba(245, 158, 11, 0.12);
+  --danger: #fb7185;
+  --danger-soft: rgba(244, 63, 94, 0.12);
+  --info: #93b4ff;
+  --info-soft: rgba(59, 130, 246, 0.12);
+
+  --sidebar-bg: #080e1b;
+  --sidebar-bg-2: #050a13;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-text: #d6e0f2;
+  --sidebar-muted: #7f90ad;
+  --sidebar-active: rgba(109, 140, 255, 0.16);
+  --sidebar-active-border: #7f9bff;
+  --sidebar-hover: rgba(255, 255, 255, 0.05);
+
+  --chart-1: #6d8cff;
+  --chart-2: #2dd4bf;
+  --chart-3: #a78bfa;
+  --chart-4: #fbbf24;
+  --chart-5: #f472b6;
+  --chart-6: #8494ad;
+  --chart-grid: #1b273c;
+  --chart-axis: #8090a8;
+  --chart-fill: rgba(109, 140, 255, 0.14);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.28), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 16px 36px -20px rgba(0, 0, 0, 0.66), 0 2px 8px rgba(0, 0, 0, 0.26);
+  --shadow-lg: 0 28px 64px -30px rgba(0, 0, 0, 0.8), 0 4px 14px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 40px 96px -40px rgba(0, 0, 0, 0.9), 0 8px 24px rgba(0, 0, 0, 0.4);
+  --focus-ring: 0 0 0 3px rgba(109, 140, 255, 0.28);
+
+  --gradient-brand: linear-gradient(135deg, #6d8cff 0%, #a78bfa 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(79, 124, 255, 0.16) 0%, rgba(139, 92, 246, 0.12) 100%);
+  --gradient-hero: radial-gradient(circle at 84% 16%, rgba(124, 58, 237, 0.2), transparent 36%),
+    radial-gradient(circle at 12% 90%, rgba(20, 184, 166, 0.13), transparent 38%),
+    linear-gradient(135deg, #101a2e 0%, #0b1322 56%, #0a1120 100%);
+  --gradient-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+}
