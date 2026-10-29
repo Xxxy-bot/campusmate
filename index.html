@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="校园智服通 CampusMate：仙桃职业学院数智校园智能服务台，提供校园办事问答、空教室查询、办事向导、学习助手与数据看板，纯前端离线运行。">
+  <title>校园智服通 CampusMate · 数智校园服务台</title>
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('campusmate.theme.v1');
+        var theme = saved === 'dark' || saved === 'light'
+          ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (err) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">跳到主要内容</a>
+
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8 8 0 0 1-8 8H5l-3 2 1-4.5A8 8 0 0 1 11 3h2a8 8 0 0 1 8 8.5Z"/><path d="M8 10h8M8 14h5"/></symbol>
+    <symbol id="i-door" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M14.5 12h.01"/><path d="M9 7h6"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19h5.5a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h5.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="M8 7h8"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/><path d="M19 8h-4"/><path d="M19 8v4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1.5 14h5M9.5 8h5M17.5 16h5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-command" viewBox="0 0 24 24"><path d="M9 6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6Z"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 5.5-8 12-8 12S4 15.5 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M16 9h3a1 1 0 0 1 1 1v11"/><path d="M8 7h4M8 11h4M8 15h4M8 19h4"/><path d="M2 21h20"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 21a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.5a6 6 0 0 1 3.5 5.5"/></symbol>
+    <symbol id="i-projector" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 8h4M14 12h3M7 20l-2 2M17 20l2 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M8 14h2M14 14h2M8 18h2"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 9v5"/><path d="M12 18h.01"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/><path d="M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7V5Z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2.5 8.5a15 15 0 0 1 19 0"/><path d="M5.5 12a10.5 10.5 0 0 1 13 0"/><path d="M8.5 15.5a6 6 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a5 5 0 0 0-6.6 6.1L3 17.5V21h3.5l4.9-4.9a5 5 0 0 0 6.1-6.6l-3.2 3.2-2.6-2.6 3.2-3.2Z"/></symbol>
+    <symbol id="i-graduation" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11.5V17c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 9v5"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 17 9 5 9-5"/></symbol>
+    <symbol id="i-git-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.5"/><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="7" r="2.5"/><path d="M6 7.5v9"/><path d="M18 9.5c0 4-5 4.5-8 5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.3 8 9 4.6-.7 8-4 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-x-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="3"/><path d="M12 3v4"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M8 17h8"/><path d="M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16 8-2.3 5.7L8 16l2.3-5.7L16 8Z"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="主导航">
+      <a class="brand" href="#/home" aria-label="校园智服通首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" class="brand-svg">
+            <rect x="2" y="2" width="36" height="36" rx="11" fill="url(#brandGradient)"/>
+            <path d="M12 26V15.5L20 10l8 5.5V26" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 26v-6h8v6" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="28.5" cy="12.5" r="3.2" fill="#5eead4"/>
+            <defs>
+              <linearGradient id="brandGradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#4f7cff"/><stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>校园智服通</strong>
+          <span>CampusMate</span>
+        </span>
+      </a>
+
+      <div class="sidebar-event">2026 计算机文化节 · 参赛作品</div>
+
+      <nav class="side-nav">
+        <p class="nav-label">工作台</p>
+        <a class="nav-item" href="#/home" data-nav="home">
+          <span class="nav-icon"><svg class="icon"><use href="#i-home"/></svg></span>
+          <span class="nav-text">首页概览</span>
+        </a>
+        <p class="nav-label">智能服务</p>
+        <a class="nav-item" href="#/ask" data-nav="ask">
+          <span class="nav-icon"><svg class="icon"><use href="#i-chat"/></svg></span>
+          <span class="nav-text">智能问答</span>
+          <span class="nav-tag">AI</span>
+        </a>
+        <a class="nav-item" href="#/rooms" data-nav="rooms">
+          <span class="nav-icon"><svg class="icon"><use href="#i-door"/></svg></span>
+          <span class="nav-text">空教室查询</span>
+        </a>
+        <a class="nav-item" href="#/guide" data-nav="guide">
+          <span class="nav-icon"><svg class="icon"><use href="#i-route"/></svg></span>
+          <span class="nav-text">办事向导</span>
+        </a>
+        <p class="nav-label">学业与数据</p>
+        <a class="nav-item" href="#/study" data-nav="study">
+          <span class="nav-icon"><svg class="icon"><use href="#i-book"/></svg></span>
+          <span class="nav-text">学习助手</span>
+        </a>
+        <a class="nav-item" href="#/analytics" data-nav="analytics">
+          <span class="nav-icon"><svg class="icon"><use href="#i-chart"/></svg></span>
+          <span class="nav-text">数据看板</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="ai-mode-card" type="button" data-action="open-settings" aria-label="打开 AI 设置">
+          <span class="ai-mode-icon"><svg class="icon"><use href="#i-sparkles"/></svg></span>
+          <span class="ai-mode-copy">
+            <span class="ai-mode-label">AI 引擎</span>
+            <strong id="sideModeText">当前：本地引擎</strong>
+          </span>
+          <svg class="icon ai-mode-arrow"><use href="#i-chevron-right"/></svg>
+        </button>
+        <div class="sidebar-meta">
+          <span>v1.0.0</span>
+          <span class="meta-dot"></span>
+          <span>纯前端 · 可离线</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebarScrim" hidden></div>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" type="button" id="menuBtn" aria-label="打开导航菜单" aria-controls="sidebar" aria-expanded="false">
+          <svg class="icon"><use href="#i-menu"/></svg>
+        </button>
+        <div class="topbar-title">
+          <span class="topbar-eyebrow">仙桃职业学院 · 数智校园</span>
+          <h1 id="pageTitle">首页概览</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="command-trigger" type="button" id="commandBtn" aria-label="打开命令面板，快捷键 Ctrl+K">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <span>搜索功能、问题或办事</span>
+            <span class="kbd-group"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+          </button>
+          <button class="mode-pill" type="button" id="modePill" data-action="open-settings" aria-label="查看或配置 AI 引擎">
+            <span class="mode-dot"></span>
+            <span id="modeText">当前：本地引擎</span>
+          </button>
+          <button class="icon-btn" type="button" id="themeBtn" aria-label="切换为深色主题" aria-pressed="false">
+            <svg class="icon theme-icon-light"><use href="#i-moon"/></svg>
+            <svg class="icon theme-icon-dark"><use href="#i-sun"/></svg>
+          </button>
+          <button class="icon-btn" type="button" data-action="open-settings" aria-label="打开设置">
+            <svg class="icon"><use href="#i-settings"/></svg>
+          </button>
+          <div class="user-chip" aria-label="当前演示账号">
+            <span class="user-avatar">林</span>
+            <span class="user-copy"><strong>林同学</strong><small>24 软件 1 班</small></span>
+          </div>
+        </div>
+      </header>
+
+      <main class="main" id="mainContent" tabindex="-1">
+        <div id="viewRoot" class="view-root"></div>
+      </main>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="noscript">本作品需要启用 JavaScript 才能运行，请在浏览器设置中开启后刷新页面。</div>
+  </noscript>
+
+  <div class="palette-layer" id="paletteLayer" hidden>
+    <div class="layer-scrim" data-action="close-palette"></div>
+    <div class="palette" role="dialog" aria-modal="true" aria-labelledby="paletteTitle">
+      <h2 class="sr-only" id="paletteTitle">全局命令面板</h2>
+      <div class="palette-search">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input id="paletteInput" type="text" autocomplete="off" spellcheck="false" placeholder="输入功能、办事名称或问题…" aria-label="搜索命令" role="combobox" aria-expanded="true" aria-controls="paletteList">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="palette-list" id="paletteList" role="listbox" aria-label="命令结果"></div>
+      <div class="palette-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> 选择</span>
+        <span><kbd>Enter</kbd> 执行</span>
+        <span>共 <strong id="paletteCount">0</strong> 项命令</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer-layer" id="settingsLayer" hidden>
+    <div class="layer-scrim" data-action="close-settings"></div>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <div class="drawer-head">
+        <div>
+          <span class="eyebrow">设置</span>
+          <h2 id="settingsTitle">AI 引擎与偏好</h2>
+        </div>
+        <button class="icon-btn" type="button" data-action="close-settings" aria-label="关闭设置">
+          <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      <div class="drawer-body">
+        <div class="settings-status" id="settingsStatus"></div>
+        <form id="settingsForm" data-form="settings">
+          <div class="field">
+            <label for="aiBaseUrl">API Base URL</label>
+            <input id="aiBaseUrl" name="baseUrl" type="text" autocomplete="off" spellcheck="false" placeholder="填写以 /v1 结尾的兼容接口地址">
+            <p class="field-help">兼容 OpenAI Chat Completions 协议；留空三项即使用本地引擎。</p>
+          </div>
+          <div class="field">
+            <label for="aiKey">API Key</label>
+            <input id="aiKey" name="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="仅保存在本机浏览器">
+          </div>
+          <div class="field">
+            <label for="aiModel">模型名</label>
+            <input id="aiModel" name="model" type="text" autocomplete="off" spellcheck="false" placeholder="例如服务商提供的模型标识">
+          </div>
+          <p class="form-error" id="settingsError" hidden></p>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">保存并启用</button>
+            <button class="btn btn-ghost" type="button" data-action="clear-ai">恢复本地引擎</button>
+          </div>
+        </form>
+
+        <section class="settings-section">
+          <h3>界面主题</h3>
+          <div class="theme-options" role="group" aria-label="选择界面主题">
+            <button class="theme-option" type="button" data-theme-choice="light">
+              <svg class="icon"><use href="#i-sun"/></svg><span>浅色</span>
+            </button>
+            <button class="theme-option" type="button" data-theme-choice="dark">
+              <svg class="icon"><use href="#i-moon"/></svg><span>深色</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h3>本地数据</h3>
+          <div class="settings-stats" id="settingsStats"></div>
+          <p class="settings-note">所有问答、课表、流程与图表数据均在浏览器本地运行；只有在你填写 API 配置并提问时，问题与检索到的知识片段才会发送到所填服务地址。API Key 以明文保存在本机 localStorage，请勿在公共电脑使用。</p>
+        </section>
+
+        <section class="settings-section">
+          <h3>快捷键</h3>
+          <div class="shortcut-list">
+            <div><span>打开命令面板</span><span><kbd>Ctrl</kbd> + <kbd>K</kbd></span></div>
+            <div><span>关闭弹层</span><span><kbd>Esc</kbd></span></div>
+            <div><span>问答框发送</span><span><kbd>Enter</kbd>；换行 <kbd>Shift</kbd> + <kbd>Enter</kbd></span></div>
+          </div>
+        </section>
+      </div>
+    </aside>
+  </div>
+
+  <div class="demo-hud" id="demoHud" hidden>
+    <div class="demo-hud-icon"><svg class="icon"><use href="#i-play"/></svg></div>
+    <div class="demo-hud-copy">
+      <span class="demo-kicker">一键演示 · <span id="demoStep">第 1 / 5 步</span></span>
+      <strong id="demoTitle">智能问答</strong>
+    </div>
+    <div class="demo-dots" id="demoDots" aria-hidden="true"></div>
+    <button class="btn btn-quiet btn-sm" type="button" data-action="stop-demo">
+      <svg class="icon"><use href="#i-stop"/></svg>停止
+    </button>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/engine.js"></script>
+  <script defer src="assets/js/ai.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</body>
+</html>
